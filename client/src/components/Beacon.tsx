@@ -5,13 +5,14 @@ import { cn } from "@/lib/utils";
 interface BeaconProps {
   x: number;
   y: number;
-  label: string;
-  subLabel: string;
+  location: string;
+  coordinates: string;
+  time: string;
   delay?: number;
   onClick?: () => void;
 }
 
-export function Beacon({ x, y, label, subLabel, delay = 0, onClick }: BeaconProps) {
+export function Beacon({ x, y, location, coordinates, time, delay = 0, onClick }: BeaconProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -47,14 +48,17 @@ export function Beacon({ x, y, label, subLabel, delay = 0, onClick }: BeaconProp
 
         {/* The HUD Tag */}
         <div className={cn(
-          "absolute left-8 top-0 flex flex-col transition-all duration-300",
+          "absolute left-8 top-0 flex flex-col gap-0.5 transition-all duration-300 text-left w-48",
           isHovered ? "opacity-100 translate-x-0" : "opacity-70 -translate-x-2"
         )}>
-          <span className="font-mono text-xs font-medium tracking-widest text-foreground">
-            [{label}]
+          <span className="font-mono text-xs font-bold tracking-widest text-foreground uppercase">
+            {location}
           </span>
-          <span className="font-mono text-[10px] text-muted-foreground tracking-wider">
-            {subLabel}
+          <span className="font-mono text-[10px] text-muted-foreground tracking-wider uppercase">
+            {coordinates}
+          </span>
+          <span className="font-mono text-[10px] text-muted-foreground tracking-wider uppercase">
+            {time}
           </span>
         </div>
 

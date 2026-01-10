@@ -5,7 +5,7 @@ export function Radar() {
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {/* Vertical scanning line */}
       <motion.div
-        className="absolute top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-border to-transparent opacity-50"
+        className="absolute top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-foreground/20 to-transparent opacity-80"
         animate={{
           x: ["0vw", "100vw"],
         }}
