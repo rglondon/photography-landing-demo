@@ -1,19 +1,20 @@
 import { Beacon } from "@/components/Beacon";
 import { HUD } from "@/components/HUD";
+import { MissionBriefing } from "@/components/MissionBriefing";
 import { Radar } from "@/components/Radar";
 import { SafariGallery } from "@/components/SafariGallery";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 export default function Home() {
-  const [view, setView] = useState<"terminal" | "gallery">("terminal");
+  const [view, setView] = useState<"terminal" | "briefing" | "gallery">("terminal");
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative selection:bg-destructive/20">
       <HUD />
       
       <AnimatePresence mode="wait">
-        {view === "terminal" ? (
+        {view === "terminal" && (
           <motion.div
             key="terminal"
             exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
@@ -37,7 +38,7 @@ export default function Home() {
                 coordinates="01.48° S, 35.14° E"
                 time="12:45 PM EAT"
                 delay={0.5}
-                onClick={() => setView("gallery")}
+                onClick={() => setView("briefing")}
               />
               
               <Beacon 
@@ -64,7 +65,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 3, duration: 1 }}
-                onClick={() => setView("gallery")}
+                onClick={() => setView("briefing")}
               >
                 <span className="font-mono text-xs tracking-[0.5em] text-muted-foreground group-hover:text-foreground transition-colors">
                   INITIALIZE SEQUENCE
@@ -73,7 +74,13 @@ export default function Home() {
               </motion.div>
             </main>
           </motion.div>
-        ) : (
+        )}
+
+        {view === "briefing" && (
+          <MissionBriefing key="briefing" onComplete={() => setView("gallery")} />
+        )}
+
+        {view === "gallery" && (
           <motion.div
             key="gallery"
             initial={{ opacity: 0 }}

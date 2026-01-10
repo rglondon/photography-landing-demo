@@ -15,18 +15,26 @@ export function SafariGallery() {
         <motion.div style={{ x }} className="flex gap-20 px-20">
           {/* Intro Card */}
           <div className="relative h-[80vh] w-[40vw] flex-shrink-0 flex flex-col justify-center">
-            <h2 className="text-[8vw] font-bold leading-none tracking-tighter text-foreground/10">
+            <h2 className="text-[8vw] font-bold leading-none tracking-tighter text-foreground/10 select-none">
               MARA
             </h2>
             <div className="absolute top-1/2 left-0 -translate-y-1/2">
               <h3 className="text-4xl font-mono font-light tracking-widest mb-4">
                 EXPEDITION 01
               </h3>
-              <p className="max-w-md text-muted-foreground font-mono text-sm leading-relaxed">
+              <p className="max-w-md text-muted-foreground font-mono text-sm leading-relaxed mb-8">
                 The Masai Mara is not just a location; it is a living, breathing entity. 
                 This collection captures the silence before the storm, the weight of the air, 
                 and the ancient rhythm of the migration.
               </p>
+              
+              {/* Scroll Hint */}
+              <div className="flex items-center gap-4 text-muted-foreground/50">
+                <div className="w-12 h-[1px] bg-current" />
+                <span className="font-mono text-[10px] tracking-widest uppercase animate-pulse">
+                  Scroll to Explore
+                </span>
+              </div>
             </div>
           </div>
 
