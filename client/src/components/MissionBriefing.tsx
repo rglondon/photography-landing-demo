@@ -40,7 +40,7 @@ export function MissionBriefing({ onComplete }: MissionBriefingProps) {
             </h2>
             <div className="relative group cursor-pointer" onClick={nextStep}>
               <img 
-                src="/images/safari_baggage_tag.webp" 
+                src="/images/safari_baggage_tag_refined.webp" 
                 alt="Expedition Ticket" 
                 className="w-full max-w-2xl shadow-2xl transform transition-transform duration-500 group-hover:scale-105"
               />
@@ -67,9 +67,9 @@ export function MissionBriefing({ onComplete }: MissionBriefingProps) {
             <div className="relative group cursor-pointer" onClick={nextStep}>
               <div className="relative overflow-hidden rounded-lg border border-border/50 bg-white p-4">
                 <img 
-                  src="/images/safari_map.webp" 
+                  src="/images/safari_map_refined.webp" 
                   alt="Expedition Map" 
-                  className="w-full max-w-xl mix-blend-multiply"
+                  className="w-full max-w-xl mix-blend-multiply object-contain"
                 />
                 {/* Animated Target Reticle */}
                 <motion.div 
