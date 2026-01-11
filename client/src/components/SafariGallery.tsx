@@ -125,7 +125,7 @@ export function SafariGallery() {
           {/* Baggage Tag Detail */}
           <div className="relative h-[80vh] w-[30vw] flex-shrink-0 flex items-center justify-center">
              <img 
-                src="/images/safari_baggage_tag.webp" 
+                src="/images/safari_baggage_tag_refined.webp" 
                 alt="Baggage Tag Detail" 
                 className="w-full object-contain transform rotate-90"
               />
