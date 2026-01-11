@@ -1,12 +1,16 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import safariLandscape1 from "@/assets/images/safari_landscape_1.webp";
+import safariLandscape2 from "@/assets/images/safari_landscape_2.webp";
+import safariPhoto3 from "@/assets/images/safari_photo_3.webp";
+import safariPhoto4 from "@/assets/images/safari_photo_4.webp";
 
 const photos = [
-  "/images/safari_landscape_1.webp",
-  "/images/safari_landscape_2.webp",
-  "/images/safari_photo_3.webp",
-  "/images/safari_photo_4.webp",
-  "/images/safari_landscape_1.webp", // Repeat for effect
+  safariLandscape1,
+  safariLandscape2,
+  safariPhoto3,
+  safariPhoto4,
+  safariLandscape1, // Repeat for effect
 ];
 
 export function FilmStripGallery() {

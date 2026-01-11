@@ -1,12 +1,16 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
+import safariLandscape1 from "@/assets/images/safari_landscape_1.webp";
+import safariLandscape2 from "@/assets/images/safari_landscape_2.webp";
+import safariPhoto3 from "@/assets/images/safari_photo_3.webp";
+import safariPhoto4 from "@/assets/images/safari_photo_4.webp";
 
 const photos = [
-  { src: "/images/safari_landscape_1.webp", x: 10, y: 20, rotate: -5 },
-  { src: "/images/safari_landscape_2.webp", x: 50, y: 10, rotate: 3 },
-  { src: "/images/safari_photo_3.webp", x: 30, y: 60, rotate: -2 },
-  { src: "/images/safari_photo_4.webp", x: 70, y: 50, rotate: 5 },
-  { src: "/images/safari_landscape_1.webp", x: 20, y: 80, rotate: 2 },
+  { src: safariLandscape1, x: 10, y: 20, rotate: -5 },
+  { src: safariLandscape2, x: 50, y: 10, rotate: 3 },
+  { src: safariPhoto3, x: 30, y: 60, rotate: -2 },
+  { src: safariPhoto4, x: 70, y: 50, rotate: 5 },
+  { src: safariLandscape1, x: 20, y: 80, rotate: 2 },
 ];
 
 export function SpatialScatterGallery() {

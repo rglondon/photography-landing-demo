@@ -1,5 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import safariLandscape1 from "@/assets/images/safari_landscape_1.webp";
+import safariLandscape2 from "@/assets/images/safari_landscape_2.webp";
+import safariBaggageTag from "@/assets/images/safari_baggage_tag_refined.webp";
 
 export function SafariGallery() {
   const targetRef = useRef<HTMLDivElement>(null);
@@ -46,7 +49,7 @@ export function SafariGallery() {
               transition={{ duration: 0.5 }}
             >
               <img 
-                src="/images/safari_landscape_1.webp" 
+                src={safariLandscape1} 
                 alt="Safari Landscape 1" 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
@@ -88,7 +91,7 @@ export function SafariGallery() {
               transition={{ duration: 0.5 }}
             >
               <img 
-                src="/images/safari_landscape_2.webp" 
+                src={safariLandscape2} 
                 alt="Safari Landscape 2" 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
@@ -125,7 +128,7 @@ export function SafariGallery() {
           {/* Baggage Tag Detail */}
           <div className="relative h-[80vh] w-[30vw] flex-shrink-0 flex items-center justify-center">
              <img 
-                src="/images/safari_baggage_tag_refined.webp" 
+                src={safariBaggageTag} 
                 alt="Baggage Tag Detail" 
                 className="w-full object-contain transform rotate-90"
               />
