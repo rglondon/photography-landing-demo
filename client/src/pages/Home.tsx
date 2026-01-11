@@ -5,15 +5,37 @@ import { Radar } from "@/components/Radar";
 import { FilmStripGallery } from "@/components/FilmStripGallery";
 import { SafariGallery } from "@/components/SafariGallery";
 import { SpatialScatterGallery } from "@/components/SpatialScatterGallery";
+import { RadarLoader } from "@/components/RadarLoader";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [view, setView] = useState<"terminal" | "briefing" | "gallery" | "filmstrip" | "scatter">("terminal");
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate initial asset loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500); // 2.5s fake load time for effect
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative selection:bg-destructive/20">
-      <HUD />
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            key="loader"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <RadarLoader />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {!isLoading && <HUD />}
       
       <AnimatePresence mode="wait">
         {view === "terminal" && (
