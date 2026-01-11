@@ -2,12 +2,14 @@ import { Beacon } from "@/components/Beacon";
 import { HUD } from "@/components/HUD";
 import { MissionBriefing } from "@/components/MissionBriefing";
 import { Radar } from "@/components/Radar";
+import { FilmStripGallery } from "@/components/FilmStripGallery";
 import { SafariGallery } from "@/components/SafariGallery";
+import { SpatialScatterGallery } from "@/components/SpatialScatterGallery";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 export default function Home() {
-  const [view, setView] = useState<"terminal" | "briefing" | "gallery">("terminal");
+  const [view, setView] = useState<"terminal" | "briefing" | "gallery" | "filmstrip" | "scatter">("terminal");
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden relative selection:bg-destructive/20">
@@ -89,12 +91,46 @@ export default function Home() {
           >
             <SafariGallery />
             
-            {/* Back Button */}
+            {/* Navigation Controls */}
+            <div className="fixed top-8 left-8 z-50 flex gap-8">
+              <button 
+                onClick={() => setView("terminal")}
+                className="font-mono text-xs tracking-widest hover:text-destructive transition-colors"
+              >
+                ← TERMINAL
+              </button>
+              <div className="flex gap-4">
+                <button onClick={() => setView("filmstrip")} className="font-mono text-xs tracking-widest opacity-50 hover:opacity-100 transition-opacity">
+                  [VIEW: FILM]
+                </button>
+                <button onClick={() => setView("scatter")} className="font-mono text-xs tracking-widest opacity-50 hover:opacity-100 transition-opacity">
+                  [VIEW: SCATTER]
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {view === "filmstrip" && (
+          <motion.div key="filmstrip" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <FilmStripGallery />
             <button 
-              onClick={() => setView("terminal")}
+              onClick={() => setView("gallery")}
               className="fixed top-8 left-8 z-50 font-mono text-xs tracking-widest hover:text-destructive transition-colors"
             >
-              ← RETURN TO TERMINAL
+              ← BACK TO EXPEDITION
+            </button>
+          </motion.div>
+        )}
+
+        {view === "scatter" && (
+          <motion.div key="scatter" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <SpatialScatterGallery />
+            <button 
+              onClick={() => setView("gallery")}
+              className="fixed top-8 left-8 z-50 font-mono text-xs tracking-widest hover:text-destructive transition-colors text-white"
+            >
+              ← BACK TO EXPEDITION
             </button>
           </motion.div>
         )}
