@@ -1,8 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import safariLandscape1 from "@/assets/images/safari_landscape_1.webp";
-import safariLandscape2 from "@/assets/images/safari_landscape_2.webp";
 import safariBaggageTag from "@/assets/images/safari_baggage_tag_refined.webp";
+import { safariPhotos } from "@/data/safari";
 
 export function SafariGallery() {
   const targetRef = useRef<HTMLDivElement>(null);
@@ -41,89 +40,59 @@ export function SafariGallery() {
             </div>
           </div>
 
-          {/* Photo 1: Landscape */}
-          <div className="relative h-[80vh] w-[70vw] flex-shrink-0 group">
-            <motion.div 
-              className="w-full h-full overflow-hidden"
-              whileHover={{ scale: 0.98 }}
-              transition={{ duration: 0.5 }}
+          {safariPhotos.slice(0, 2).map((photo, index) => (
+            <div
+              key={photo.src}
+              className="relative h-[80vh] w-[70vw] flex-shrink-0 group"
             >
-              <img 
-                src={safariLandscape1} 
-                alt="Safari Landscape 1" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              />
-            </motion.div>
-            
-            {/* Baggage Tag Overlay */}
-            <div className="absolute bottom-8 right-8 bg-white text-black p-4 font-mono text-xs transform rotate-3 group-hover:rotate-0 transition-transform duration-300 shadow-xl">
-              <div className="border-2 border-black p-2">
-                <div className="flex justify-between items-center mb-2 border-b border-black pb-1">
-                  <span className="font-bold text-lg">MRE</span>
-                  <span className="text-[10px]">FLIGHT 002</span>
-                </div>
-                <div className="space-y-1">
-                  <div className="flex justify-between">
-                    <span>ISO</span>
-                    <span>400</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>APERTURE</span>
-                    <span>f/5.6</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>SHUTTER</span>
-                    <span>1/1000</span>
-                  </div>
-                </div>
-                <div className="mt-4 pt-2 border-t border-black text-center font-bold cursor-pointer hover:bg-black hover:text-white transition-colors">
-                  ACQUIRE PRINT
-                </div>
-              </div>
-            </div>
-          </div>
+              <motion.div
+                className="w-full h-full overflow-hidden"
+                whileHover={{ scale: 0.98 }}
+                transition={{ duration: 0.5 }}
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+              </motion.div>
 
-          {/* Photo 2: Landscape */}
-          <div className="relative h-[80vh] w-[70vw] flex-shrink-0 group">
-            <motion.div 
-              className="w-full h-full overflow-hidden"
-              whileHover={{ scale: 0.98 }}
-              transition={{ duration: 0.5 }}
-            >
-              <img 
-                src={safariLandscape2} 
-                alt="Safari Landscape 2" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              />
-            </motion.div>
-            
-            {/* Baggage Tag Overlay */}
-            <div className="absolute top-8 left-8 bg-white text-black p-4 font-mono text-xs transform -rotate-2 group-hover:rotate-0 transition-transform duration-300 shadow-xl">
-              <div className="border-2 border-black p-2">
-                <div className="flex justify-between items-center mb-2 border-b border-black pb-1">
-                  <span className="font-bold text-lg">MRE</span>
-                  <span className="text-[10px]">FLIGHT 003</span>
-                </div>
-                <div className="space-y-1">
-                  <div className="flex justify-between">
-                    <span>ISO</span>
-                    <span>200</span>
+              {/* Baggage Tag Overlay */}
+              <div
+                className={
+                  index === 0
+                    ? "absolute bottom-8 right-8 bg-white text-black p-4 font-mono text-xs transform rotate-3 group-hover:rotate-0 transition-transform duration-300 shadow-xl"
+                    : "absolute top-8 left-8 bg-white text-black p-4 font-mono text-xs transform -rotate-2 group-hover:rotate-0 transition-transform duration-300 shadow-xl"
+                }
+              >
+                <div className="border-2 border-black p-2">
+                  <div className="flex justify-between items-center mb-2 border-b border-black pb-1">
+                    <span className="font-bold text-lg">{photo.airportCode ?? "MRE"}</span>
+                    <span className="text-[10px]">FLIGHT {photo.flight ?? String(index + 2).padStart(3, "0")}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>APERTURE</span>
-                    <span>f/8.0</span>
+                  <div className="space-y-1">
+                    <div className="flex justify-between">
+                      <span>ISO</span>
+                      <span>{photo.iso ?? "—"}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>APERTURE</span>
+                      <span>{photo.aperture ?? "—"}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>SHUTTER</span>
+                      <span>{photo.shutter ?? "—"}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span>SHUTTER</span>
-                    <span>1/500</span>
+                  <div className="mt-4 pt-2 border-t border-black text-center font-bold cursor-pointer hover:bg-black hover:text-white transition-colors">
+                    ACQUIRE PRINT
                   </div>
-                </div>
-                <div className="mt-4 pt-2 border-t border-black text-center font-bold cursor-pointer hover:bg-black hover:text-white transition-colors">
-                  ACQUIRE PRINT
                 </div>
               </div>
             </div>
-          </div>
+          ))}
 
           {/* Baggage Tag Detail */}
           <div className="relative h-[80vh] w-[30vw] flex-shrink-0 flex items-center justify-center">

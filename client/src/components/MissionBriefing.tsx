@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface MissionBriefingProps {
   onComplete: () => void;
@@ -10,11 +10,18 @@ export function MissionBriefing({ onComplete }: MissionBriefingProps) {
 
   const nextStep = () => {
     if (step < 2) {
-      setStep(step + 1);
-    } else {
-      onComplete();
+      setStep((s) => s + 1);
+      return;
     }
+
+    onComplete();
   };
+
+  useEffect(() => {
+    if (step !== 2) return;
+    const t = setTimeout(() => onComplete(), 1200);
+    return () => clearTimeout(t);
+  }, [step, onComplete]);
 
   return (
     <motion.div 
@@ -82,9 +89,36 @@ export function MissionBriefing({ onComplete }: MissionBriefingProps) {
               </div>
               <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="font-mono text-xs text-destructive tracking-widest animate-pulse">
-                  [INITIATE DROP]
+                  [CONFIRM INSERTION]
                 </span>
               </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Step 2: System Handoff */}
+        {step === 2 && (
+          <motion.div
+            initial={{ opacity: 0, filter: "blur(6px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            className="flex flex-col items-center text-center"
+          >
+            <h2 className="font-mono text-xs tracking-[0.5em] mb-10 text-muted-foreground uppercase">
+              System // Handshake
+            </h2>
+            <div className="border border-border/50 bg-background/80 px-10 py-8 rounded-lg backdrop-blur">
+              <div className="font-mono text-sm tracking-widest">
+                ROUTING…
+              </div>
+              <div className="mt-3 font-mono text-xs text-muted-foreground">
+                Transferring control to expedition gallery.
+              </div>
+              <motion.div
+                className="mt-8 h-[1px] w-64 bg-foreground/20"
+                initial={{ scaleX: 0, transformOrigin: "left" }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 1.1, ease: "easeInOut" }}
+              />
             </div>
           </motion.div>
         )}
